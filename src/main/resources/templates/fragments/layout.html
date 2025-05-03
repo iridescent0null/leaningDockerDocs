@@ -66,6 +66,11 @@
             <span th:text="#{error}">Error</span>
           </li>
 
+          <li
+            th:replace="~{::menuItem ('/foo','fooBar','Additional item to learn things','search',#{barFoo})}">
+            <span th:text="#{barFoo}">foo bar</span>
+          </li>
+
         </ul>
       </div>
     </div>
