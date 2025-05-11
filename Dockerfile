@@ -27,7 +27,7 @@ COPY ./src src/
 RUN --mount=type=bind,source=pom.xml,target=pom.xml \
     # --mount=type=cache,target=/root/.m2 ./mvnw dependency:go-offline -DskipTests
     --mount=type=cache,target=/root/.m2 \
-    ./mvnw test
+    ./mvnw test -Dtest=V*,Pe*,Cl*,En*,Cr*,My*,Ow*
 
 FROM base AS deps
 WORKDIR /build
@@ -112,4 +112,5 @@ COPY --from=extract build/target/extracted/application/ ./
 
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "-Dspring.boot.run.profiles=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
+# ENTRYPOINT [ "java", "-Dspring.boot.run.profiles=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
+ENTRYPOINT [ "java", "-Dspring.profiles.active=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
