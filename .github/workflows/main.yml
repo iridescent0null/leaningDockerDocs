@@ -24,10 +24,15 @@ jobs:
           target: test
           load: true
 
+      - name: Prepare repo name
+        run: echo "::set-output name=lowerCaseValue::${UPPERCASE_NAME,,}"
+        env:
+          UPPERCASE_NAME: ${{github.event.repository.name}}
+      
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64,linux/arm64
           push: true
           target: final
-          tags: ${{ vars.DOCKER_USERNAME }}/${{ lower(github.event.repository.name) }}:latest
+          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
