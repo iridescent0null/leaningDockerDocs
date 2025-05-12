@@ -24,7 +24,7 @@ jobs:
           target: test
           load: true
 
-      - name: Prepare repo name
+      - id: toLowerCase
         run: echo "::set-output name=lowerCaseValue::${UPPERCASE_NAME,,}"
         env:
           UPPERCASE_NAME: ${{github.event.repository.name}}
@@ -35,4 +35,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           target: final
-          tags: ${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}:latest
+          tags: ${{ vars.DOCKER_USERNAME }}/${{ steps.toLowerCase.lowerCaseValue }}:latest
