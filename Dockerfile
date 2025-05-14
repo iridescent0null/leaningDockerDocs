@@ -112,5 +112,4 @@ COPY --from=extract build/target/extracted/application/ ./
 
 EXPOSE 8080
 
-# ENTRYPOINT [ "java", "-Dspring.boot.run.profiles=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
-ENTRYPOINT [ "java", "-Dspring.profiles.active=postgres", "org.springframework.boot.loader.launch.JarLauncher" ]
+ENTRYPOINT [ "java", "org.springframework.boot.loader.launch.JarLauncher" ]
